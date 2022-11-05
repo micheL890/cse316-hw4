@@ -258,6 +258,7 @@ function GlobalStoreContextProvider(props) {
             payload: {}
         });
         tps.clearAllTransactions();
+        history.push("/");
     }
 
     // THIS FUNCTION CREATES A NEW LIST
@@ -319,7 +320,7 @@ function GlobalStoreContextProvider(props) {
     }
     store.deleteList = function (id) {
         async function processDelete(id) {
-            let response = await api.deletePlaylistById(id);
+            let response = await api.deletePlaylistById(id);//ById
             if (response.data.success) {
                 store.loadIdNamePairs();
                 history.push("/");
