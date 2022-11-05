@@ -6,9 +6,10 @@ import Modal from '@mui/material/Modal';
 
 const style = {
     position: 'absolute',
-    top: '50%',
+    top: '50%', 
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    height: 300,
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
@@ -49,7 +50,7 @@ export default function MUIEditSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open= {store.isEditSongModalOpen}// open={store.listMarkedForDeletion !== null}
         >
             <Box sx={style}>
             <div
