@@ -13,8 +13,13 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import MUILoginErrorModal from './MUILoginErrorModal';
+import GlobalStoreContext from '../store';
+
+
 export default function RegisterScreen() {
     const { auth } = useContext(AuthContext);
+    const { store } = useContext(GlobalStoreContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,6 +31,9 @@ export default function RegisterScreen() {
             formData.get('password'),
             formData.get('passwordVerify')
         );
+        if(!auth.user){
+            store.showLoginError("error msg");
+        }
     };
 
     return (
@@ -116,6 +124,7 @@ export default function RegisterScreen() {
                                 </Link>
                             </Grid>
                         </Grid>
+                        <MUILoginErrorModal/>
                     </Box>
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
