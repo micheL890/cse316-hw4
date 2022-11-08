@@ -10,13 +10,15 @@ export const AuthActionType = {
     GET_LOGGED_IN: "GET_LOGGED_IN",
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
-    REGISTER_USER: "REGISTER_USER"
+    REGISTER_USER: "REGISTER_USER",
+    ERROR_MSG: "ERROR_MSG"
 }
 
 function AuthContextProvider(props) {
     const [auth, setAuth] = useState({
         user: null,
-        loggedIn: false
+        loggedIn: false,
+        msg: "never edited"
     });
     const history = useHistory();
 
@@ -30,25 +32,36 @@ function AuthContextProvider(props) {
             case AuthActionType.GET_LOGGED_IN: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: payload.loggedIn
+                    loggedIn: payload.loggedIn,
+                    msg: auth.msg
                 });
             }
             case AuthActionType.LOGIN_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    msg: auth.msg
                 })
             }
             case AuthActionType.LOGOUT_USER: {
                 return setAuth({
                     user: null,
-                    loggedIn: false
+                    loggedIn: false,
+                    msg: auth.msg
                 })
             }
             case AuthActionType.REGISTER_USER: {
                 return setAuth({
                     user: payload.user,
-                    loggedIn: true
+                    loggedIn: true,
+                    msg: auth.msg
+                })
+            }
+            case AuthActionType.ERROR_MSG: {
+                return setAuth({
+                    user: null,
+                    loggedIn: false,
+                    msg: payload
                 })
             }
             default:
@@ -93,6 +106,13 @@ function AuthContextProvider(props) {
             })
             history.push("/");
         }
+        /*else{
+            authReducer({
+                type: AuthActionType.ERROR_MSG,
+                payload: response.data.errorMessage
+            })
+        }*/
+        
     }
 
     auth.logoutUser = async function() {

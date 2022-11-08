@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import GlobalStoreContext from '../store';
-import AuthContext from '../auth'
+
 
 import * as React from 'react';
 import Box from '@mui/material/Box';

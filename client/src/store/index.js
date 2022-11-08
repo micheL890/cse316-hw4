@@ -365,10 +365,10 @@ function GlobalStoreContextProvider(props) {
         });        
     }
 
-    store.showLoginError = () => {
+    store.showLoginError = (msg) => {
         storeReducer({
             type: GlobalStoreActionType.LOGIN_ERROR,
-            payload: {}
+            payload: {msg}
         });        
     }
 

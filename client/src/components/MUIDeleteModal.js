@@ -53,6 +53,6 @@ export default function MUIDeleteModal() {
                 </div>
             </div>
             </Box>
-        </Modal>
+        </Modal> 
     );
 }
