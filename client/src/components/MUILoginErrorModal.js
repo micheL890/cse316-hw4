@@ -3,6 +3,7 @@ import GlobalStoreContext from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import Alert from '@mui/material/Alert';
 
 const style = {
     position: 'absolute',
@@ -18,27 +19,26 @@ const style = {
 
 export default function MUILoginErrorModal() {
     const { store } = useContext(GlobalStoreContext);
-    setOpen(true);
-
-    function handleCloseModal(event) {
+    function handleCloseModal() {
         store.hideModals();
     }
 
     return (
         <Modal
-            open={isLoginErrorModalOpen}
+            open={store.isLoginErrorModalOpen()}
         >
             <Box sx={style}>
+            <Alert severity="error">This is an error alert!</Alert>
                 <div className="modal-dialog">
                 <header className="dialog-header">
-                    Error: you fucked up logging in
+                    Error: Wrong email or password provided
                 </header>
                 <div id="confirm-cancel-container">
                     <button
                         id="dialog-no-button"
                         className="modal-button"
                         onClick={handleCloseModal}
-                    >Cancel</button>
+                    >Ok</button>
                 </div>
             </div>
             </Box>

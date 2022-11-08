@@ -16,8 +16,13 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import GlobalStoreContext from '../store';
+import MUILoginErrorModal from './MUILoginErrorModal';
+
+
 export default function LoginScreen() {
     const { auth } = useContext(AuthContext);
+    const { store } = useContext(GlobalStoreContext);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -25,7 +30,11 @@ export default function LoginScreen() {
         auth.loginUser(
             formData.get('email'),
             formData.get('password')
-        );
+        )
+        if(!auth.user){
+            store.showLoginError();
+        }
+
 
     };
 
@@ -111,6 +120,7 @@ export default function LoginScreen() {
                     </Box>
                 </Box>
             </Grid>
+            <MUILoginErrorModal/>
         </Grid>
     );
 }
